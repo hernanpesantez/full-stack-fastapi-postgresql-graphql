@@ -10,6 +10,11 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 steps:
+
+- task: DownloadSecureFile@1
+  inputs:
+    secureFile: '.env'
+
 - task: DockerCompose@0
   displayName: Combine configuration
   inputs:
