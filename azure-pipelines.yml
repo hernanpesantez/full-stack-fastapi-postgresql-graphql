@@ -1,4 +1,7 @@
 # Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
 
 trigger:
 - main
@@ -7,66 +10,20 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- script: echo Running up!
-  displayName: 'Pipeline started'
+- script: echo Hello, world!
+  displayName: 'Run a one-line script'
+
 
 - script: |
-    echo running app
-  displayName: 'Deploying App'
-
-- task: DockerCompose@0
-  inputs:
-    containerregistrytype: 'Azure Container Registry'
-    dockerComposeFile: '**/docker-compose.yml'
-    additionalDockerComposeFiles: '**/docker-compose.override.yml'
-    dockerComposeFileArgs: |
-      DOMAIN=localhost
-      # DOMAIN=local.dockertoolbox.tiangolo.com
-      # DOMAIN=localhost.tiangolo.com
-      # DOMAIN=dev.hernan.io
-      
-      STACK_NAME=hernan-io
-      
-      TRAEFIK_PUBLIC_NETWORK=traefik-public
-      TRAEFIK_TAG=hernan.io
-      TRAEFIK_PUBLIC_TAG=traefik-public
-      
-      DOCKER_IMAGE_BACKEND=backend
-      DOCKER_IMAGE_CELERYWORKER=celeryworker
-      DOCKER_IMAGE_FRONTEND=frontend
-      
-      # Backend
-      BACKEND_CORS_ORIGINS=["http://localhost", "http://localhost:4200", "http://localhost:3000", "http://localhost:8080", "https://localhost", "https://localhost:4200", "https://localhost:3000", "https://localhost:8080", "http://dev.hernan.io", "https://dev.hernan.io", "https://hernan.io", "http://local.dockertoolbox.tiangolo.com", "http://localhost.tiangolo.com"]
-      PROJECT_NAME=porfolio
-      SECRET_KEY=0091a006b40e554ab17a5b5a3ce31ff12baf944484ac56de8582b0b172fd65bb
-      FIRST_SUPERUSER=admin@hernan.io
-      FIRST_SUPERUSER_PASSWORD=Mate1822
-      SMTP_TLS=True
-      SMTP_PORT=587
-      SMTP_HOST=
-      SMTP_USER=
-      SMTP_PASSWORD=
-      EMAILS_FROM_EMAIL=info@hernan.io
-      
-      USERS_OPEN_REGISTRATION=False
-      
-      SENTRY_DSN=
-      
-      # Flower
-      FLOWER_BASIC_AUTH=admin:Mate1822
-      
-      # Postgres
-      POSTGRES_SERVER=db
-      POSTGRES_USER=postgres
-      POSTGRES_PASSWORD=Mate1822
-      POSTGRES_DB=app
-      
-      # PgAdmin
-      PGADMIN_LISTEN_PORT=5050
-      PGADMIN_DEFAULT_EMAIL=admin@hernan.io
-      PGADMIN_DEFAULT_PASSWORD=Mate1822
-    action: 'Run a Docker Compose command'
-    dockerComposeCommand: 'docker-compose -f .\docker-compose.yml -f .\docker-compose.override.yml up --build  --remove-orphans'
-
-
+    - task: DockerCompose@0
+      displayName: Combine configuration
+      inputs:
+        action: Combine configuration
+        azureSubscriptionEndpoint: $(azureSubscriptionEndpoint)
+        azureContainerRegistry: $(azureContainerRegistry)
+        dockerComposeFile: docker-compose.yml
+        additionalDockerComposeFiles: docker-compose.override.yml
+        projectName: $(Build.Repository.Name)
+        qualifyImageNames: true
+        outputDockerComposeFile: $(Build.StagingDirectory)/docker-compose.yml
 
