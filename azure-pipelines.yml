@@ -12,11 +12,13 @@ pool:
 steps:
 
 - task: DownloadSecureFile@1
+  name: mySecureFile # The name with which to reference the secure file's path on the agent, like $(mySecureFile.secureFilePath)
   inputs:
     secureFile: '.env'
+    #retryCount: 5 # Optional
 
 - script: |
-    sudo cp $(.env.secureFilePath) $(Agent.TempDirectory)/.env
+    sudo cp $(mySecureFile.secureFilePath) $(Agent.TempDirectory)/.env
 
 - task: DockerCompose@0
   displayName: Combine configuration
