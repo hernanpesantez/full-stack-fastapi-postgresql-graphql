@@ -3,27 +3,44 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
+# trigger:
+# - main
+
+# pool:
+#   vmImage: ubuntu-latest
+
+# steps:
+# - script: echo Hello, world!
+#   displayName: 'Run a one-line script'
+
+
+# - script: |
+#     - task: DockerCompose@0
+#       displayName: Combine configuration
+#       inputs:
+#         action: Combine configuration
+#         azureSubscriptionEndpoint: $(azureSubscriptionEndpoint)
+#         azureContainerRegistry: $(azureContainerRegistry)
+#         dockerComposeFile: docker-compose.yml
+#         additionalDockerComposeFiles: docker-compose.override.yml
+#         projectName: $(Build.Repository.Name)
+#         qualifyImageNames: true
+#         outputDockerComposeFile: $(Build.StagingDirectory)/docker-compose.yml
+
 trigger:
 - main
 
 pool:
-  vmImage: ubuntu-latest
-
+  vmImage: 'ubuntu-latest'
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
-
-
-- script: |
-    - task: DockerCompose@0
-      displayName: Combine configuration
-      inputs:
-        action: Combine configuration
-        azureSubscriptionEndpoint: $(azureSubscriptionEndpoint)
-        azureContainerRegistry: $(azureContainerRegistry)
-        dockerComposeFile: docker-compose.yml
-        additionalDockerComposeFiles: docker-compose.override.yml
-        projectName: $(Build.Repository.Name)
-        qualifyImageNames: true
-        outputDockerComposeFile: $(Build.StagingDirectory)/docker-compose.yml
-
+- task: DockerCompose@0
+  displayName: Combine configuration
+  inputs:
+    action: Combine configuration
+    azureSubscriptionEndpoint: $(azureSubscriptionEndpoint)
+    azureContainerRegistry: $(azureContainerRegistry)
+    dockerComposeFile: docker-compose.yml
+    additionalDockerComposeFiles: docker-compose.override.yml
+    projectName: $(Build.Repository.Name)
+    qualifyImageNames: true
+    outputDockerComposeFile: $(Build.StagingDirectory)/docker-compose.yml
