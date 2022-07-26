@@ -33,8 +33,6 @@
 trigger:
 - master
 
-resources:
-- master
 
 variables:
   azureSubscription: a2d66221-cfb0-4024-b856-b74e60ffbaa8
@@ -42,7 +40,8 @@ variables:
 
 
 # Agent should be non micorosft
-vmImageName: ubuntu-latest
+pool:
+  vmImageName: ubuntu-latest
 
 steps:
 - task: DotNetCoreCLI@2
