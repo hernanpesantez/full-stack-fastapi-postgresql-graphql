@@ -35,7 +35,7 @@ trigger:
 
 
 variables:
-  azureSubscription: Visual Studio Professional Subscription
+  azureSubscription: xyz devops
   azureContainerRegistryEndPoint: testfastapi.azurecr.io
 
 
