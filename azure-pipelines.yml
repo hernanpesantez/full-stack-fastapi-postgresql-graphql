@@ -35,7 +35,7 @@ trigger:
 
 
 variables:
-  azureSubscription: a2d66221-cfb0-4024-b856-b74e60ffbaa8
+  azureSubscription: Visual Studio Professional Subscription
   azureContainerRegistryEndPoint: testfastapi.azurecr.io
 
 
