@@ -17,8 +17,8 @@ steps:
     secureFile: '.env'
     #retryCount: 5 # Optional
 
-# - script: |
-#     sudo cp $(mySecureFile.secureFilePath) $(Agent.TempDirectory)/.env
+- script: |
+    sudo cat $(mySecureFile.secureFilePath)
 
 - task: DockerCompose@0
   displayName: Combine configuration
