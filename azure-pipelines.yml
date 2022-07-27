@@ -10,9 +10,8 @@ trigger:
 #   azureContainerRegistryEndPoint: testfastapi.azurecr.io
 
 
-# Agent should be non micorosft
 pool:
-  vmImageName: ubuntu-latest
+  vmImage: ubuntu-latest
 
 steps:
 
