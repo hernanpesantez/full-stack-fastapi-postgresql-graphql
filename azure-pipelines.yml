@@ -18,12 +18,12 @@ steps:
 
 - task: DownloadSecureFile@1
   inputs:
-    secureFile: 'secureFile'
+    secureFile: '.env'
 
 - task: CopyFiles@2
   inputs:
     SourceFolder: '$(Agent.TempDirectory)'
-    Contents: secureFile
+    Contents: .env
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
     
 - task: DockerCompose@0
