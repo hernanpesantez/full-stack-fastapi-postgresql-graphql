@@ -21,7 +21,7 @@ steps:
 - task: DockerCompose@0
   inputs:
     containerregistrytype: 'Azure Container Registry'
-    azureSubscription: 'Visual Studio Professional Subscription (a2d66221-cfb0-4024-b856-b74e60ffbaa8)'
+    azureSubscription: 'Visual Studio Professional Subscription(2)(a2d66221-cfb0-4024-b856-b74e60ffbaa8)'
     azureContainerRegistry: '{"loginServer":"testfastapi.azurecr.io", "id" : "/subscriptions/a2d66221-cfb0-4024-b856-b74e60ffbaa8/resourceGroups/Test-fastAPI/providers/Microsoft.ContainerRegistry/registries/TestFastAPI"}'
     dockerComposeFile: '**/docker-compose.yml'
     additionalDockerComposeFiles: '**/docker-compose.override.yml'
