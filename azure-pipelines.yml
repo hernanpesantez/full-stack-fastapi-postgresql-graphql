@@ -23,7 +23,7 @@ steps:
   inputs:
     SourceFolder: '$(Agent.TempDirectory)'
     Contents: '.env'
-    TargetFolder: '$(Build.ArtifactStagingDirectory)/full-stack-fastapi-postgresql-graphql'
+    TargetFolder: '$(System.DefaultWorkingDirectory)/full-stack-fastapi-postgresql-graphql'
 
 - task: CmdLine@2
   inputs:
