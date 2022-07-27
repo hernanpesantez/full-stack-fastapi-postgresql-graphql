@@ -79,6 +79,6 @@ steps:
 - task: AzureWebAppContainer@1
   displayName: Azure Web App on Container Deploy
   inputs:
-    appName: fastAPI
+    appName: fastapitestapplication
     azureSubscription: 'Visual Studio Professional Subscription(a2d66221-cfb0-4024-b856-b74e60ffbaa8)'
     imageName: testfastapi.azurecr.io/TestFastAP:$(build.buildId)
