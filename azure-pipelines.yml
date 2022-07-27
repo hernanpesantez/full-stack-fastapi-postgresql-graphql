@@ -45,6 +45,7 @@ steps:
     projectName: $(Build.Repository.Name)
     qualifyImageNames: true
     additionalImageTags: $(Build.BuildId)
+    outputDockerComposeFile: $(Build.StagingDirectory)/docker-compose.yml
 
 - task: DockerCompose@0
   displayName: Push services
@@ -57,6 +58,7 @@ steps:
     projectName: $(Build.Repository.Name)
     qualifyImageNames: true
     additionalImageTags: $(Build.BuildId)
+    outputDockerComposeFile: $(Build.StagingDirectory)/docker-compose.yml
     
 - task: DockerCompose@0
   displayName: Run services
@@ -71,3 +73,4 @@ steps:
     buildImages: true
     abortOnContainerExit: true
     detached: false
+    outputDockerComposeFile: $(Build.StagingDirectory)/docker-compose.yml
