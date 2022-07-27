@@ -60,17 +60,25 @@ steps:
     additionalImageTags: $(Build.BuildId)
     outputDockerComposeFile: '$(System.DefaultWorkingDirectory)/docker-compose.yml'
     
-- task: DockerCompose@0
-  displayName: Run services
+# - task: DockerCompose@0
+#   displayName: Run services
+#   inputs:
+#     action: Run services
+#     azureSubscription: 'Visual Studio Professional Subscription(a2d66221-cfb0-4024-b856-b74e60ffbaa8)'
+#     azureContainerRegistry: '{"loginServer":"testfastapi.azurecr.io", "id" : "/subscriptions/a2d66221-cfb0-4024-b856-b74e60ffbaa8/resourceGroups/Test-fastAPI/providers/Microsoft.ContainerRegistry/registries/TestFastAPI"}'
+#     dockerComposeFile: '**/docker-compose.yml'
+#     additionalDockerComposeFiles: '**/docker-compose.override.yml'
+#     projectName: $(Build.Repository.Name)
+#     qualifyImageNames: true
+#     buildImages: true
+#     abortOnContainerExit: true
+#     detached: false
+#     outputDockerComposeFile: '$(System.DefaultWorkingDirectory)/docker-compose.yml'
+
+
+- task: AzureWebAppContainer@1
+  displayName: Azure Web App on Container Deploy
   inputs:
-    action: Run services
+    appName: fastAPI
     azureSubscription: 'Visual Studio Professional Subscription(a2d66221-cfb0-4024-b856-b74e60ffbaa8)'
-    azureContainerRegistry: '{"loginServer":"testfastapi.azurecr.io", "id" : "/subscriptions/a2d66221-cfb0-4024-b856-b74e60ffbaa8/resourceGroups/Test-fastAPI/providers/Microsoft.ContainerRegistry/registries/TestFastAPI"}'
-    dockerComposeFile: '**/docker-compose.yml'
-    additionalDockerComposeFiles: '**/docker-compose.override.yml'
-    projectName: $(Build.Repository.Name)
-    qualifyImageNames: true
-    buildImages: true
-    abortOnContainerExit: true
-    detached: false
-    outputDockerComposeFile: '$(System.DefaultWorkingDirectory)/docker-compose.yml'
+    imageName: testfastapi.azurecr.io/TestFastAP:$(build.buildId)
