@@ -29,6 +29,7 @@ steps:
   inputs:
     script: |
       echo  '$(System.DefaultWorkingDirectory)'
+      echo  '$(Build.ArtifactStagingDirectory)'
       dir
       
     
