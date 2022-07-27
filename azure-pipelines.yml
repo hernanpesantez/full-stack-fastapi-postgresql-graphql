@@ -45,3 +45,15 @@ steps:
     projectName: $(Build.Repository.Name)
     qualifyImageNames: true
     additionalImageTags: $(Build.BuildId)
+
+- task: DockerCompose@0
+  displayName: Push services
+  inputs:
+    action: Push services
+    azureSubscription: 'Visual Studio Professional Subscription(a2d66221-cfb0-4024-b856-b74e60ffbaa8)'
+    azureContainerRegistry: '{"loginServer":"testfastapi.azurecr.io", "id" : "/subscriptions/a2d66221-cfb0-4024-b856-b74e60ffbaa8/resourceGroups/Test-fastAPI/providers/Microsoft.ContainerRegistry/registries/TestFastAPI"}'
+    dockerComposeFile: '**/docker-compose.yml'
+    additionalDockerComposeFiles: '**/docker-compose.override.yml'
+    projectName: $(Build.Repository.Name)
+    qualifyImageNames: true
+    additionalImageTags: $(Build.BuildId)
